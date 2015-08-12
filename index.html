@@ -3,8 +3,6 @@
 
 	<head>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-
 		<style>
 
 		  body {
@@ -95,7 +93,14 @@
   		var sigma   = .025 ;
   		var gamma   = .025 ;
   		var prec    = 1/4 ;
-  		var keyDiv  = d3.selectAll('div[data-viz="true"')[0] ;      
+  		var keyDiv  = [] ; 
+      var div     = document.getElementsByTagName('div') ; 
+
+      for(var kdiv = 0 ; kdiv < div.length ; kdiv++) { // find key divs using data-viz attribute
+        if(div[kdiv].getAttribute('data-viz') === "true") {
+          keyDiv.push(div[kdiv]) ; // add key div to keyDiv array
+        }
+      }
       var Nviz    = keyDiv.length ;
 
       function get_offset( el ) { // helper function from: http://stackoverflow.com/questions/10564680/get-div-position-top-in-javascript 
@@ -181,7 +186,7 @@
           currentIndex = index ;
         }
 
-        console.log('index', index, 'currentIndex', currentIndex, 'opacity', viz_opacity(index)) ;
+        // console.log('index', index, 'currentIndex', currentIndex, 'opacity', viz_opacity(index)) ;
         viz.setAttribute('style', 'opacity:' + viz_opacity(index) + ';') ;
 
       } ;
