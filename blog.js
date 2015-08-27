@@ -32,13 +32,8 @@ function viz_blog(vizUrl) {
     var windowHeight = window_height() ;
     var scaleFactor  = 0.5 ;
     var offset       = windowHeight * scaleFactor ;
-  	for(var kdiv = 0 ; kdiv < Nviz ; kdiv++) { // compute the normalized coordinates of the key divs
-  		divBox[kdiv]   = keyDiv[kdiv].getBoundingClientRect() ;  // normalized position of key div
-      if(divBox[kdiv].top < offset && divBox[kdiv].bottom > offset) { 
-        divBox[kdiv].straddle = true ;
-      } else {
-        divBox[kdiv].straddle = false ;
-      }
+  	for(var kdiv = 0 ; kdiv < Nviz ; kdiv++) { // compute the coordinates of the key divs
+  		divBox[kdiv]   = keyDiv[kdiv].getBoundingClientRect() ;  // coordinates of key div
       divBox[kdiv].d = Math.min(Math.abs(divBox[kdiv].top - offset), Math.abs(divBox[kdiv].bottom - offset)) ; // distance of this box to some point inside the window
   	}
   }
@@ -96,7 +91,7 @@ function viz_blog(vizUrl) {
     var nDivIndex ;
     if (currentIndex > 0) {
       distDiff  = divBox[currentIndex - 1].d - divBox[currentIndex].d ;
-      nDivIndex = kdiv ;
+      nDivIndex = currentIndex - 1 ;
     }
     if(currentIndex < Nviz - 1) {
       var dx = divBox[currentIndex + 1].d - divBox[currentIndex].d  ;
@@ -105,11 +100,13 @@ function viz_blog(vizUrl) {
         nDivIndex = currentIndex + 1 ;
       }      
     }
+
     var dTol = 100 ; // start  fading out when neighboring div gets within this distance of the center line
     var dCut = 50 ;  // finish fading out when neighboring div gets within this distance of the center line
+
     if(divBox[nDivIndex].d < dTol) {
-      console.log('currentIndex', currentIndex, 'nDivIndex', nDivIndex, 'd', divBox[nDivIndex].d)
       opacity = Math.max(0, (divBox[nDivIndex].d - dCut) / dCut) ;
+      console.log('currentIndex', currentIndex, 'nDivIndex', nDivIndex, 'd', divBox[nDivIndex].d, 'opacity', opacity)
     } 
 
     return round_to(opacity, prec) ;
