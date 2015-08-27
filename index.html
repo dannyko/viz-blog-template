@@ -47,86 +47,176 @@
 
 	<body onscroll="scroll_callback();">
 
-		<script>
+    <div id="contentDiv">
+      <div>
+        <h1>Introduction</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+      </div>
+      <div data-viz="true">
+        <h1>Section 1</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>      
+      </div>
+      <div data-viz="true">
+        <h1>Section 2</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>      
+      </div>
+      <div data-viz="true">
+        <h1>Section 3</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>      
+      </div>
+      <div data-viz="true">
+        <h1>Section 4</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>      
+      </div>
+      <div>
+        <h1>Conclusion</h1>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        yo   <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>
+        blah <br/>            
+      </div>
+    </div>
 
-
-      /*
-       *   setup the div containing the text content describing the interactive visualizations:
-       */
-      var textContainer = document.createElement('div') ; // this is the div that contains all of the content divs
-      textContainer.setAttribute('id', 'contentDiv') ; // set the ID of this div so that the CSS rules will apply
-      document.body.appendChild(textContainer) ; // add the div to the page via the DOM
-
-
-      /*
-       *   create some dummy content for testing purposes: 
-       */
-      function add_divs(Ndiv) { 
-      	for (var kdiv = 0 ; kdiv < Ndiv ; kdiv++) {
-      		var d       = document.createElement('div') ;
-          d.innerText = kdiv ;
-          if(kdiv % 50 == 0) d.setAttribute('data-viz', 'true') ; // set key-divs to trigger visualization opacity effects
-          textContainer.appendChild(d) ;
-      	}      	
-      }
-    	var Ndiv = 200 ;
-    	add_divs(Ndiv) ; // insert some content for debugging, key divs marked by attribute: data-viz="true" 
-
-
-      /*
-       *   compute the document's dimensions now that the content has been added:
-       */
-			var body         = document.body ;
-			var html         = document.documentElement ;
-			var height       = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ) ;
-			var windowWidth  = window.innerWidth  ||  html.clientWidth  ||  body.clientWidth ;
-			var windowHeight = window.innerHeight ||  html.clientHeight || body.clientHeight ;      	
-			var maxScrollY   = height - windowHeight ;
-
-
-      /*
-       *   setup the coordinates of the content divs that are linked to the interactive visualizations: 
-       */
-  		var divTop  = [] ;
-  		var divNorm = [] ;
-  		var divOpac = [] ;
-  		var sigma   = .025 ;
-  		var gamma   = .025 ;
-  		var prec    = 1/4 ;
-  		var keyDiv  = [] ; 
-      var div     = document.getElementsByTagName('div') ; 
-
-      for(var kdiv = 0 ; kdiv < div.length ; kdiv++) { // find key divs using data-viz attribute
-        if(div[kdiv].getAttribute('data-viz') === "true") {
-          keyDiv.push(div[kdiv]) ; // add key div to keyDiv array
-        }
-      }
-      var Nviz    = keyDiv.length ;
-
-      function get_offset( el ) { // helper function from: http://stackoverflow.com/questions/10564680/get-div-position-top-in-javascript 
-        var _x = 0;
-        var _y = 0;
-        while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-            _x += el.offsetLeft ; // - el.scrollLeft;
-            _y += el.offsetTop ; // - el.scrollTop;
-            el = el.offsetParent;
-        }
-        return { top: _y, left: _x };
-      } ;
-
-  		for(var kdiv = 0 ; kdiv < Nviz ; kdiv++) { // compute the normalized coordinates of the key divs
-  			divTop[kdiv]  = get_offset(keyDiv[kdiv]).top ; // position of key div
-  			divNorm[kdiv] = divTop[kdiv] / maxScrollY ;  // normalized position of key div
-  		}
-      if(divTop[Nviz - 1] > maxScrollY) {  // in case last key-frame is below maxScrollY
-        divTop[Nviz - 1]  = maxScrollY ; // make sure last visualization is fully visible when page is fully scrolled down
-        divNorm[Nviz - 1] = divTop[Nviz - 1] / maxScrollY ;
-      }
-
-
-      /* 
-       *   setup the div elements containing the interactive visualizations:
-       */
+		<script src="blog.js"></script>
+    
+    <script>
 
       var vizUrl = [ // the URLs for the interactive vizualizations
         'http://bl.ocks.org/dannyko/raw/649beb7bc989f1db1eb4/', 
@@ -134,66 +224,10 @@
         'http://bl.ocks.org/dannyko/raw/0956c361a6ce22362867/', 
         'http://bl.ocks.org/dannyko/raw/ffe9653768cb80dfc0da/'
       ] ;
-      var viz = document.createElement('div') ;
-      viz.setAttribute('class', 'vizDiv') ;
-      viz.setAttribute('style', 'opacity:0;') ;
-      document.body.appendChild(viz) ;            
-      var frame = document.createElement('iframe') ;
 
-      /*
-       *   update the interactive visualization opacities using the text scroll position:
-       */
-  		function gaussian(x, mu, sigma) { // helper function for computing opacity values from an (exponentiated) Gaussian envelope
-  			var z = (x - mu) / sigma ;
-        return Math.exp(-0.5 * z * z) ;
-   		}
-   		function round_to(x, prec) { // helper function for rounding opacity values, to quantize them on a grid
-        return Math.round(x / prec) * prec ;
-   		}
+      viz_blog(vizUrl) ;
 
-      function current_index() {
-        for(var kdiv    = 0 ; kdiv < Nviz ; kdiv++) {
-          divOpac[kdiv] = viz_opacity(kdiv) ;
-        }        
-        var maxOpacityIndex = 0 ;
-        var maxOpacity      = 0 ;
-        for(var kdiv = 0 ; kdiv < Nviz ; kdiv++) {
-          if(divOpac[kdiv] > maxOpacity) {
-            maxOpacity = divOpac[kdiv] ;
-            maxOpacityIndex = kdiv ;        
-          }
-        }
-        return maxOpacityIndex ;
-      }
-
-      var currentIndex = -1 ; // initialize
-
-      function viz_opacity(kdiv) {
-        var t = window.scrollY / maxScrollY ; // t in [0, 1], the normalized position on the page
-        return round_to(Math.pow(gaussian(t, divNorm[kdiv], sigma), gamma), prec) ;
-      }
-
-			function scroll_callback() { // handles scrolling events and appropriately adjusts the opacities of the visualizations
-
-        var index = current_index() ;
-        if(currentIndex != index) {
-          frame.remove() ;
-          frame = document.createElement('iframe') ;
-          frame.setAttribute('width', '100%') ;
-          frame.setAttribute('height', '100%') ;
-          frame.setAttribute('src', vizUrl[index]) ;      
-          viz.appendChild(frame) ;
-          currentIndex = index ;
-        }
-
-        // console.log('index', index, 'currentIndex', currentIndex, 'opacity', viz_opacity(index)) ;
-        viz.setAttribute('style', 'opacity:' + viz_opacity(index) + ';') ;
-
-      } ;
-
-      scroll_callback() ;
-
-		</script>
+    </script>
 
 	</body>
 
