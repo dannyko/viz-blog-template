@@ -101,15 +101,18 @@ function viz_blog(vizUrl) {
       }      
     }
 
-    var dTol = 100 ; // start  fading out when neighboring div gets within this distance of the center line
-    var dCut = 50 ;  // finish fading out when neighboring div gets within this distance of the center line
+    var dTol = .3 * windowHeight ; // start  fading out when neighboring div gets within this distance of the center line
+    var dCut = .1 * windowHeight ;  // finish fading out when neighboring div gets within this distance of the center line
 
     if(divBox[nDivIndex].d < dTol) {
-      opacity = Math.max(0, (divBox[nDivIndex].d - dCut) / dCut) ;
-      console.log('currentIndex', currentIndex, 'nDivIndex', nDivIndex, 'd', divBox[nDivIndex].d, 'opacity', opacity)
+      opacity = Math.max(0, (divBox[nDivIndex].d - dCut) / (dTol - dCut)) ;
     } 
 
-    return round_to(opacity, prec) ;
+    opacity = round_to(opacity, prec) ;
+    var opCut = 0.6 ; // for thresholding
+    if(opacity > opCut) opacity = 1 ;
+
+    return opacity ;
 
   } ;
 
